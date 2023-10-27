@@ -16,6 +16,18 @@ async def root():
     return { "message": "Hello World" }
 
 
+@app.get("/chatbot/")
+async def chatbot(question: str = 'No question'):
+    """
+    Chatbot endpoint
+    :param question: question to ask the chatbot
+    :return: Hello World
+    Method of calling the api endpoint:
+    http://localhost:8000/chatbot/?question=Hello
+    """
+    return { "message": f"you have asked: {question}" }
+
+
 if __name__ == "__main__":
     import uvicorn
 
