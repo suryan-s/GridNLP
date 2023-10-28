@@ -17,6 +17,7 @@ class ChatScreenState extends State<ChatScreen> {
   final List<ChatMessage> _messages = [];
   final TextEditingController _textController = TextEditingController();
   late bool isFilled = false;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +95,7 @@ class ChatScreenState extends State<ChatScreen> {
                         maxLines: null,
                         controller: _textController,
                         decoration: const InputDecoration(
-                          hintText: "Message",
+                          hintText: "Start typing...",
                           hintStyle: TextStyle(color: Colors.white54),
                           border: InputBorder.none,
                         ),
