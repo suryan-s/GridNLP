@@ -1,20 +1,12 @@
-# 🤖 GridNLP - Substation Asset Maintenance Chatbot
+# 🤖 **GridNLP**
 
 
-<br>
+## Introduction: - Substation Asset Maintenance Chatbot
 
 
-## Introduction
-
-
-<div style="display: flex; justify-content: center; align-items: center;">
-  <p style="text-align: center;">
-    GridNLP represents a conversational chat bot system engineered to provide indispensable support within the realm of Substation Asset Maintenance. By harnessing the capabilities of Natural Language Processing (NLP), GridNLP adeptly addresses user inquiries pertaining to maintenance procedures, assessment thresholds, issue troubleshooting, safety protocols, and equipment recommendations. Notably, GridNLP remains an ongoing development effort, dedicated to delivering precision, granularity, and insightful feedback to augment the maintenance protocols within the substation industry.
-
+GridNLP represents a conversational chat bot system engineered to provide indispensable support within the realm of Substation Asset Maintenance. By harnessing the capabilities of Natural Language Processing (NLP), GridNLP adeptly addresses user inquiries pertaining to maintenance procedures, assessment thresholds, issue troubleshooting, safety protocols, and equipment recommendations. Notably, GridNLP remains an ongoing development effort, dedicated to delivering precision, granularity, and insightful feedback to augment the maintenance protocols within the substation industry.
 The development framework for this endeavor is founded on tools such as NLTK, PyTorch, and FastAPI for the Python backend, complemented by the utilization of Flutter for mobile application development. The retrieval of responses is orchestrated through advanced techniques, including cosine similarity and tag matching. Additionally, a robust spell checker has been seamlessly integrated into the backend to ensure optimal response quality.
-  </p>
-<!--   <img src="https://github.com/suryan-s/GridNLP/assets/76394506/ee9510cd-c7ce-4c8c-b711-5006e0da1527" alt="Logo" style="width: 100px; height: 100px;"> -->
-</div>
+
 
 <div style="display: flex; justify-content: space-between;">
   <img src="https://github.com/suryan-s/GridNLP/assets/76394506/b03013c8-46c7-4eed-b211-2680cab74f84" alt="Image 1" width="48%">
