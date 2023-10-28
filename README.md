@@ -28,17 +28,16 @@ GridNLP offers a range of features to facilitate user interactions:
 
 To interact with GridNLP, you can use the chatbot through a web interface or integrate it into your applications. Here's how to get started:
 
-1. 🌐 **Web Interface**: Visit [https://GridNLP.com](https://GridNLP.com) to chat with GridNLP and get answers to your maintenance-related queries.
 
-2. 🧩 **API Integration**: For developers, GridNLP offers API endpoints for seamless integration into your applications. Refer to the API documentation for more details.
+1. 🧩 **API Integration**: For developers, GridNLP offers API endpoints for seamless integration into your applications..
 
 ## Installation
 
 GridNLP is a cloud-based chatbot, and there is no need for installation on your local machine. You can access it directly via the web interface or integrate it into your systems using the provided APIs.
 
-## API Documentation
+[//]: # (## API Documentation)
 
-For developers interested in integrating GridNLP into their applications, the API documentation provides details on available endpoints, request formats, and responses. To access the API documentation, visit [https://GridNLP.com/api-docs](https://GridNLP.com/api-docs).
+[//]: # (For developers interested in integrating GridNLP into their applications, the API documentation provides details on available endpoints, request formats, and responses. To access the API documentation, visit [https://GridNLP.com/api-docs]&#40;https://GridNLP.com/api-docs&#41;.)
 
 ## Usage Examples
 
