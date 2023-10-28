@@ -34,8 +34,8 @@ class ChatNet(nn.Module):
         return out
 
 
-# nltk.download('punkt')
-# nltk.download('words')
+nltk.download('punkt')
+nltk.download('words')
 nltk.data.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                                    "models", "nltk_data"))
 stemmer = PorterStemmer()
