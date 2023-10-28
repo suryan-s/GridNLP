@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:chatbot/Constants/constants.dart';
 import 'package:chatbot/Screens/widgets/ChatMessage.dart';
 import 'package:chatbot/Screens/widgets/Drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -125,23 +128,50 @@ class ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  void _handleSubmitted(String text) {
+  void _handleSubmitted(String text) async {
     _textController.clear();
     ChatMessage message = ChatMessage(
-      text: text, backgroundColor: Colors.redAccent, isUser: true,
+      text: text.trim(),
+      backgroundColor: Colors.redAccent,
+      isUser: true,
     );
     setState(() {
       _messages.add(message);
     });
 
-    // Simulate a response message (you can replace this with your actual response logic)
-    Future.delayed(const Duration(seconds: 1), () {
-      ChatMessage responseMessage = const ChatMessage(
-        text: 'This is a response message.', backgroundColor: Colors.white70, isUser: false,
-      );
-      setState(() {
-        _messages.add(responseMessage);
-      });
+    final responseText = await _fetchResponseFromAPI(text);
+    ChatMessage responseMessage = ChatMessage(
+      text: responseText,
+      backgroundColor: Colors.white70,
+      isUser: false,
+    );
+    setState(() {
+      _messages.add(responseMessage);
     });
   }
+
+  Future<String> _fetchResponseFromAPI(String text) async {
+    final apiUrl = '${baseURL}chatbot/';
+    final response = await http.get(
+      Uri.parse('$apiUrl?question=$text'),
+    );
+    if (response.statusCode == 200) {
+      final jsonResponseList = json.decode(response.body) as List;
+      if (jsonResponseList.isNotEmpty) {
+        final jsonResponse = jsonResponseList.first as Map<String, dynamic>;
+        final answer = jsonResponse['response'];
+        if (answer != null) {
+          return answer;
+        } else {
+          return 'Response not found in JSON';
+        }
+      } else {
+        return 'Empty JSON response';
+      }
+    } else {
+      return 'Failed to fetch response from the API';
+    }
+  }
+
+
 }
