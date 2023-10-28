@@ -1,12 +1,13 @@
 import json
 import os
-from utils import tokenize, stem, bag_of_words
-import numpy as np
-from model import ChatNet
 
+import numpy as np
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
+
+from model import ChatNet
+from utils import tokenize, stem, bag_of_words
 
 with open('intents.json') as f:
     intents = json.load(f)
@@ -65,8 +66,8 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = ChatNet(input_size, hidden_size, output_size).to(device)
 
 criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-num_epoch = 1000
+optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
+num_epoch = 800
 
 for epoch in range(num_epoch):
     for (words, labels) in train_loader:
@@ -95,6 +96,6 @@ data = {
     "tags": tags
     }
 
-FILE = os.path.join('models', 'torch', 'data.pth')
+FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "models", "torch", "data.pth")
 torch.save(data, FILE)
 print("Training completed successfully and saved to file")
