@@ -16,7 +16,14 @@ class ChatScreen extends StatefulWidget {
 class ChatScreenState extends State<ChatScreen> {
   final List<ChatMessage> _messages = [];
   final TextEditingController _textController = TextEditingController();
+  ScrollController _scrollController = ScrollController();
   late bool isFilled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +45,7 @@ class ChatScreenState extends State<ChatScreen> {
       body: Stack(
         children: [
           Container(
-            decoration:  BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -52,9 +59,12 @@ class ChatScreenState extends State<ChatScreen> {
                 child: Container(
                   color: primaryColor,
                   child: ListView.builder(
+                    controller: _scrollController,
+                    reverse: true,
                     itemCount: _messages.length,
                     itemBuilder: (context, index) {
-                      return _messages[index];
+                      final reversedIndex = _messages.length - 1 - index;
+                      return _messages[reversedIndex];
                     },
                   ),
                 ),
@@ -110,9 +120,8 @@ class ChatScreenState extends State<ChatScreen> {
           const SizedBox(width: 8.0),
           Container(
             decoration: BoxDecoration(
-              color: isFilled
-                  ? const Color(0xFFEA3799)
-                  : const Color(0xFF1A1A3F),
+              color:
+                  isFilled ? const Color(0xFFEA3799) : const Color(0xFF1A1A3F),
               borderRadius: BorderRadius.circular(30.0),
             ),
             child: IconButton(
@@ -138,6 +147,12 @@ class ChatScreenState extends State<ChatScreen> {
     setState(() {
       _messages.add(message);
     });
+
+    _scrollController.animateTo(
+      0.0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
 
     final responseText = await _fetchResponseFromAPI(text);
     ChatMessage responseMessage = ChatMessage(
@@ -172,6 +187,4 @@ class ChatScreenState extends State<ChatScreen> {
       return 'Failed to fetch response from the API';
     }
   }
-
-
 }
