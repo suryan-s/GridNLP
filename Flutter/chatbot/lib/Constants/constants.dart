@@ -2,4 +2,7 @@ import 'package:flutter/material.dart';
 
 String title = "GridNLP";
 Color cardColor = const Color(0xFF2E2E2E);
-Color scafflodBackgroundColor = const Color(0xFF171717);
+Color scaffoldBackgroundColor = const Color(0xFF171717);
+Color primaryColor = const Color(0xFF000000);
+
+String logo = "assets/images/chatbot.png";
