@@ -41,8 +41,12 @@ nltk.data.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspa
 stemmer = PorterStemmer()
 device = device("cuda" if cuda.is_available() else "cpu")
 
-with open('bot/intents.json') as f:
-    intents = json.load(f)
+try:
+    with open('bot/intents.json') as f:
+        intents = json.load(f)
+except FileNotFoundError:
+    with open('intents.json') as f:
+        intents = json.load(f)
 FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "models", "torch", "data.pth")
 data = load(FILE)
 input_size = data["input_size"]
@@ -56,6 +60,7 @@ model = ChatNet(input_size, hidden_size, output_size).to(device)
 model.load_state_dict(model_state)
 model.eval()
 vectorizer = TfidfVectorizer()
+word_set = words.words()
 
 
 def tokenize(sentence):
@@ -103,7 +108,7 @@ def spelling_correction(input_sentence):
     for word in tokenize(input_sentence):
         if len(word) > 1:
             temp = [(jaccard_distance(set(ngrams(word, 2)), set(ngrams(w, 2))), w)
-                    for w in words.words() if w[0] == word[0]]
+                    for w in word_set if w[0] == word[0]]
             corrected_sentence.append(sorted(temp, key=lambda val: val[0])[0][1])
         else:
             corrected_sentence.append(word)
@@ -137,9 +142,9 @@ def get_bot_response(input_sentence: str):
                 tfidf_matrix = vectorizer.fit_transform([input_sentence] + responses)
                 cosine_similarities = linear_kernel(tfidf_matrix[0:1], tfidf_matrix[1:]).flatten()
                 best_response = responses[cosine_similarities.argmax()]
-                yield best_response
+                return best_response
     else:
-        yield "Sorry I don\'t know'"
+        return "Sorry I don\'t know'"
 
 
 if __name__ == "__main__":
@@ -151,4 +156,4 @@ if __name__ == "__main__":
     words = ["hi", "hiiii", "hiiiiiii"]
     stem_words = [stem(w) for w in words]
     print(stem_words)
-    print(spelling_correction("hiiii thiss iss nitt a cortectt worrd"))
+    print(spelling_correction("hiiii thiss iss nott a cortectt worrd"))
