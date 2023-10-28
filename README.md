@@ -3,6 +3,11 @@
 ## Introduction
 
 GridNLP is an intelligent chatbot designed to assist users in the field of Substation Asset Maintenance. Leveraging natural language processing (NLP), it answers user queries related to maintenance tasks, including test procedures, acceptable limits, issue resolution, safety guidelines, and equipment recommendations. The chatbot aims to provide accurate, detailed, and informative responses to enhance the maintenance processes within the substation industry.
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://github.com/suryan-s/GridNLP/assets/76394506/b03013c8-46c7-4eed-b211-2680cab74f84" alt="Image 1" width="48%">
+  <img src="https://github.com/suryan-s/GridNLP/assets/76394506/ca3ff4f2-6363-4cbb-82b7-64eb8a3114b2" alt="Image 2" width="48%">
+</div>
+
 
 ## Features
 
