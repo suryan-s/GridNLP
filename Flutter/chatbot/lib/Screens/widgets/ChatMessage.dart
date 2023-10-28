@@ -28,7 +28,8 @@ class ChatMessage extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: Color(0xFFEA3799), // Customize the color for bots
                 ),
-                child: const Icon(Icons.android, color: Colors.white, size: 20), // Customize the icon
+                child: const Icon(Icons.android,
+                    color: Colors.white, size: 20), // Customize the icon
               ),
             if (isUser)
               Container(
@@ -38,31 +39,36 @@ class ChatMessage extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: Color(0xFF1A1A3F), // Customize the color for users
                 ),
-                child: const Icon(Icons.person, color: Colors.white, size: 20), // Customize the icon
+                child: const Icon(Icons.person,
+                    color: Colors.white, size: 20), // Customize the icon
               ),
             const SizedBox(width: 8), // Spacing between icon and message
-            Container(
-              margin: const EdgeInsets.only(top: 8, bottom: 8),
-              padding: const EdgeInsets.all(12.0),
-              decoration: BoxDecoration(
-                color: backgroundColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(isUser ? 12 : 0),
-                  topRight: Radius.circular(isUser ? 0 : 12),
-                  bottomLeft: const Radius.circular(12),
-                  bottomRight: const Radius.circular(12),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.only(top: 8, bottom: 8),
+                padding: const EdgeInsets.all(12.0),
+                decoration: BoxDecoration(
+                  color: backgroundColor,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(isUser ? 12 : 0),
+                    topRight: Radius.circular(isUser ? 0 : 12),
+                    bottomLeft: const Radius.circular(12),
+                    bottomRight: const Radius.circular(12),
+                  ),
                 ),
-              ),
-              child: Expanded(
-              child: Text(text,
-                style: const TextStyle(
+                child: Expanded(
+                    child: Text(
+                  text,
+                  style: const TextStyle(
                     color: Colors.white,
-                overflow: TextOverflow.clip,),)
+                    overflow: TextOverflow.clip,
+                  ),
+                )),
+              ),
             ),
+          ],
         ),
-      ],),
-    ),
+      ),
     );
   }
 }
-
