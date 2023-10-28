@@ -14,7 +14,7 @@ async def root():
     Root endpoint
     :return: Hello World
     """
-    return { "message": "Bot up and working!" }
+    return { "message": "Bot up and working!" }, 200
 
 
 @app.get("/chatbot/")
@@ -41,4 +41,4 @@ async def chatbot(question: str):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("server:app", reload=True)
+    uvicorn.run("server:app", use_colors=True, workers=2)
