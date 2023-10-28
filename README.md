@@ -1,5 +1,12 @@
 # 🤖 GridNLP - Substation Asset Maintenance Chatbot
 
+
+<br>
+
+
+## Introduction
+
+
 <div style="display: flex; justify-content: center; align-items: center;">
   <p style="text-align: center;">
     GridNLP represents a conversational chat bot system engineered to provide indispensable support within the realm of Substation Asset Maintenance. By harnessing the capabilities of Natural Language Processing (NLP), GridNLP adeptly addresses user inquiries pertaining to maintenance procedures, assessment thresholds, issue troubleshooting, safety protocols, and equipment recommendations. Notably, GridNLP remains an ongoing development effort, dedicated to delivering precision, granularity, and insightful feedback to augment the maintenance protocols within the substation industry.
