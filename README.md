@@ -2,7 +2,7 @@
 
 ## Introduction
 
-GridNLP is an intelligent chatbot designed to assist users in the field of Substation Asset Maintenance. Leveraging natural language processing (NLP), it answers user queries related to maintenance tasks, including test procedures, acceptable limits, issue resolution, safety guidelines, and equipment recommendations. The chatbot aims to provide accurate, detailed, and informative responses to enhance the maintenance processes within the substation industry.
+GridNLP is an intelligent chatbot designed to assist users in the field of Substation Asset Maintenance. Leveraging natural language processing (NLP), it answers user queries related to maintenance tasks, including test procedures, acceptable limits, issue resolution, safety guidelines, and equipment recommendations. The chatbot aims to provide accurate, detailed, and informative responses to enhance the maintenance processes within the substation industry. The Project was build using Flutter for Mobile app development and FastAPI for python backend development. The models were created using pytorch and basic concepts of NLP. Intentation vs tag matching with cosine similarity have been added for better responses.
 
 ## Features
 
@@ -26,14 +26,20 @@ GridNLP offers a range of features to facilitate user interactions:
 
 ## Getting Started
 
-To interact with GridNLP, you can use the chatbot through a web interface or integrate it into your applications. Here's how to get started:
+To interact with GridNLP, you can use the chatbot through a CLI interface or integrate it into your applications. Here's how to get started:
 
 
-1. 🧩 **API Integration**: For developers, GridNLP offers API endpoints for seamless integration into your applications..
+1. 🧩 **API Integration**: For developers, GridNLP offers API endpoints for seamless integration into your applications. Currently the api `https://gridnlp.onrender.com/chatbot/?question=` is live to be integrsted into your application.
+2. **Custom Training**: Modify the intents.json for your requirements and run the train.py in bot directory. The resultant model would be available in the models directory. Load them in the server.py for further applications
 
 ## Installation
 
-GridNLP is a cloud-based chatbot, and there is no need for installation on your local machine. You can access it directly via the web interface or integrate it into your systems using the provided APIs.
+GridNLP build file is available in the repo for the recent updated apk file. 
+For further development of the project or for personal use, follow the steps:
+1. The project directory contains the Flutter and Python dev envs combined. So for the app development, cd into the flutter/chatbot.
+2. For the python backend development, bot directory contains all the necessary files for training, adding new intents.json for custom training, simple cmd based chat etc.
+3. Run `python -m venv .env` for creating a new environment. Activate the environment and run `pip -r requirements.txt` to install the necessary packages.
+4. To run the server locally, simply do `python server.py` to start the FastAPI server.
 
 [//]: # (## API Documentation)
 
@@ -73,6 +79,6 @@ GridNLP is released under the [MIT License](LICENSE).
 
 ## Support
 
-If you encounter any issues, have questions, or need assistance, please contact our support team at [support@GridNLP.com](mailto:support@GridNLP.com).
+If you encounter any issues, have questions, or need assistance, please contact our support team at [suryans0405@gmail.com](mailto:suryans0405@gmail.com).
 
 GridNLP - Empowering Substation Asset Maintenance with NLP.
