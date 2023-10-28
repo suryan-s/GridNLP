@@ -12,7 +12,6 @@ void main() {
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
     getPages: [
-      // GetPage(name: '/', page: () => const SplashScreen()),
       GetPage(name: '/', page: () => const WelcomeScreen()),
       GetPage(
           name: '/home',
