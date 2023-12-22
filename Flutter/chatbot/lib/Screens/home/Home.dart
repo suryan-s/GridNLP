@@ -16,8 +16,21 @@ class ChatScreen extends StatefulWidget {
 class ChatScreenState extends State<ChatScreen> {
   final List<ChatMessage> _messages = [];
   final TextEditingController _textController = TextEditingController();
-  late bool isFilled = false;
-  final ScrollController _scrollController = ScrollController();
+  bool isFilled = false;
+  bool isWaiting = false;
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +66,12 @@ class ChatScreenState extends State<ChatScreen> {
                 child: Container(
                   color: primaryColor,
                   child: ListView.builder(
+                    controller: _scrollController,
+                    reverse: true,
                     itemCount: _messages.length,
                     itemBuilder: (context, index) {
-                      return _messages[index];
+                        final reversedIndex = _messages.length - 1 - index;
+                        return _messages[reversedIndex];
                     },
                   ),
                 ),
@@ -137,7 +153,24 @@ class ChatScreenState extends State<ChatScreen> {
       isUser: true,
     );
     setState(() {
+      isWaiting = true;
       _messages.add(message);
+    });
+
+    _scrollController.animateTo(
+      0.0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
+
+    ChatMessage waitingMessage = ChatMessage(
+      text: 'Loading...',
+      backgroundColor: Colors.white70,
+      isUser: false,
+      isWaiting: true,
+    );
+    setState(() {
+      _messages.add(waitingMessage);
     });
 
     final responseText = await _fetchResponseFromAPI(text);
@@ -147,6 +180,8 @@ class ChatScreenState extends State<ChatScreen> {
       isUser: false,
     );
     setState(() {
+      isWaiting = false;
+      _messages.removeLast();
       _messages.add(responseMessage);
     });
   }
@@ -174,5 +209,46 @@ class ChatScreenState extends State<ChatScreen> {
     }
   }
 
+  Widget _loadingIndicator() {
+    return Center(
+      child: Row(
+        children: [
+            Container(
+              width: 30, // Adjust the size as needed
+              height: 30, // Adjust the size as needed
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFEA3799), // Customize the color for bots
+              ),
+              child: const Icon(Icons.android,
+                  color: Colors.white, size: 20), // Customize the icon
+            ),
+            const SizedBox(width: 8), // Spacing between icon and message
+          Flexible(
+            child: Container(
+              // margin: const EdgeInsets.only(top: 8, bottom: 8),
+              padding: const EdgeInsets.all(12.0),
+              decoration: const BoxDecoration(
+                color: Colors.white70,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(0),
+                  topRight: Radius.circular(12),
+                  bottomLeft: Radius.circular(12),
+                  bottomRight: Radius.circular(12),
+                ),
+              ),
+              child: const Text(
+                'Loading...',
+                style: TextStyle(
+                  color: Colors.black,
+                  overflow: TextOverflow.clip,
+                ),
+              ),
+            ),
+          ),
+        ]
+      ),
+    );
+  }
 
 }

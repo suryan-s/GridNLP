@@ -42,7 +42,7 @@ stemmer = PorterStemmer()
 device = device("cuda" if cuda.is_available() else "cpu")
 
 try:
-    with open('bot/intents.json') as f:
+    with open(os.path.join('bot', 'intents')) as f:
         intents = json.load(f)
 except FileNotFoundError:
     with open('intents.json') as f:

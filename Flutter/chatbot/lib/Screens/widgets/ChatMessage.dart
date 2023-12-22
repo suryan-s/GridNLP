@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ChatMessage extends StatelessWidget {
   final String text;
   final Color backgroundColor;
   final bool isUser;
+  final bool isWaiting;
 
   ChatMessage({
     Key? key,
     required this.text,
     required this.backgroundColor,
     required this.isUser,
+    this.isWaiting = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-      child: Align(
+      child:Align(
         alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
         child: Row(
           mainAxisAlignment:
@@ -36,31 +39,41 @@ class ChatMessage extends StatelessWidget {
               ),
             if (!isUser)
               const SizedBox(width: 8), // Spacing between icon and message
-            Flexible(
-              child: Container(
-                // margin: const EdgeInsets.only(top: 8, bottom: 8),
-                padding: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: backgroundColor,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(isUser ? 12 : 0),
-                    topRight: Radius.circular(isUser ? 0 : 12),
-                    bottomLeft: const Radius.circular(12),
-                    bottomRight: const Radius.circular(12),
-                  ),
+            if (isWaiting)
+              SizedBox(
+                width: 30,
+                height: 30,
+                child: LoadingAnimationWidget.halfTriangleDot(
+                  color: const Color(0xFFEA8237),
+                  size: 25,
                 ),
-                child: Text(
-                  text,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    overflow: TextOverflow.clip,
+              ),
+            if (!isWaiting)
+              Flexible(
+                child: Container(
+                  // margin: const EdgeInsets.only(top: 8, bottom: 8),
+                  padding: const EdgeInsets.all(12.0),
+                  decoration: BoxDecoration(
+                    color: backgroundColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(isUser ? 12 : 0),
+                      topRight: Radius.circular(isUser ? 0 : 12),
+                      bottomLeft: const Radius.circular(12),
+                      bottomRight: const Radius.circular(12),
+                    ),
+                  ),
+                  child: Text(
+                    text,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      overflow: TextOverflow.clip,
+                    ),
                   ),
                 ),
               ),
-            ),
-            if (isUser)
+            if (isUser && !isWaiting)
               const SizedBox(width: 8), // Spacing between icon and message
-            if (isUser)
+            if (isUser && !isWaiting)
                 Container(
                   width: 30, // Adjust the size as needed
                   height: 30, // Adjust the size as needed
